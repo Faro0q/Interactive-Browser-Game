@@ -1,11 +1,17 @@
-
-body {
-  padding:0;
-  margin:0;
-  background:#e1e1ea;
+*{
+			background: #CC99CC;
+		}
+#main {
+    background-image: url('img/tree.png');
 }
-canvas {
-  display:block;
-  margin:30px auto 0;
-  background: #f0f0f4
-}
+		canvas {
+         /*   */
+            border: 1px solid #CC66CC;
+			display: block;
+			margin: auto;
+		}
+		p{
+			font-size:20px;
+			text-align:center;
+			font-family: Helvetica;
+		}
