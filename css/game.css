@@ -1,9 +1,6 @@
 *{
 			background: #CC99CC;
 		}
-#main {
-    background-image: url('img/tree.png');
-}
 		canvas {
          /*   */
             border: 1px solid #CC66CC;
