@@ -12,10 +12,10 @@ var harm = 0; //the blocks that will kill you
 
 
 var player = {
-    radius: 15, 
+    size: 30, 
     x: canvas.width / 2, 
     y: canvas.height / 2 + 40, 
-    color: "green";
+    color: "green"
 };
 
 document.addEventListener("keydown", keyDown, false);
@@ -54,7 +54,102 @@ function keyUp(e) {
 	}
 }
 
+// specs for balls you want to collect
+var benefit = {
+	x:[],
+	y:[],
+	speed: 2,
+	color: ["red","blue","yellow"],
+	state: []
+};
+var redNum = 0;
+
+// specs for balls you want to avoid
+var harm = {
+	x:[],
+	y:[],
+	speed: 2,
+	color: ["black", "purple", "#003300", "#663300", "white"]
+
+};
+var blackNum = 0;
+var rad = 10;
+
+// adds value to x property of goodArc
+function drawNewGood(){
+	if(Math.random() < .02){
+		benefit.x.push(Math.random() * canvas.width);
+		benefit.y.push(0);
+		benefit.state.push(true);
+
+	}
+	redNum = benefit.x.length;
+}
+
+//adds values to x property of badArc
+function drawNewBad() {
+	if(score < 30){
+		if(Math.random() < .05){
+			harm.x.push(Math.random() * canvas.width);
+			harm.y.push(0);
+		}
+	}
+	else if(score < 50){
+		if(Math.random() < .1){
+			harm.x.push(Math.random() * canvas.width);
+			harm.y.push(0);
+		}
+	}
+	else{
+		if(Math.random() < .2){
+			harm.x.push(Math.random() * canvas.width);
+			harm.y.push(0);
+		}
+	}
+	blackNum = harm.x.length;
+}
+
 function drawPlayer() {
-    
-    var monkey = 
-  }
+	contxt.beginPath();
+	contxt.rect(player.x, player.y, player.size, player.size);
+	contxt.fillStyle = player.color;
+	contxt.fill();
+	contxt.closePath();
+}
+
+function draw(){
+	contxt.clearRect(0, 0, canvas.width, canvas.height);
+	if(!gameOver){
+		drawPlayer();
+		drawBlackBall();
+		drawRedBall();
+		playUpdate();
+		drawNewGood();
+		drawNewBad();
+			
+		//score
+		contxt.fillStyle = "black";
+		contxt.font = "20px Helvetica";
+		contxt.textAlign = "left";
+		contxt.fillText("Score: " + score, 10, 25);
+	
+		//lives
+		contxt.textAlign = "right";
+		contxt.fillText("Lives: " + lives, 500, 25);
+	}
+	else{
+		contxt.fillStyle = "black";
+		contxt.font = "25px Helvetica";
+		contxt.textAlign = "center";
+		contxt.fillText("GAME OVER!", canvas.width/2, 175);
+		
+		contxt.font = "20px Helvetica";
+		contxt.fillText("PRESS SPACE TO PLAY", canvas.width/2, 475);
+		
+		contxt.fillText("FINAL SCORE: " + score, canvas.width/2, 230);
+	}
+	document.getElementById("level").innerHTML = "Level: " + level;
+	requestAnimationFrame(draw);
+}
+
+draw();
