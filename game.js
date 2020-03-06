@@ -239,6 +239,12 @@ function playAgain() {
 }
 function draw(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+     var img2 = document.getElementById("image2");
+       ctx.drawImage(img2, 10, 10);
+    
+    ctx.fillStyle = "grey";
+        ctx.font = "bold 300px Arial";
+        ctx.fillText(level, (canvas.width / 2) + 650, (canvas.height / 2) - 90);
 	if(!gameOver){
 		drawPlayer();
 		drawBlackBall();
@@ -247,14 +253,8 @@ function draw(){
 		drawNewGood();
 		drawNewBad();
         
-       // var img2 = document.getElementById("image2");
-       // ctx.drawImage(img2, 10, 10);
-        ctx.fillStyle = "grey";
-        ctx.font = "bold 300px Arial";
-        ctx.fillText(level, (canvas.width / 2) + 650, (canvas.height / 2) - 90);
-			
 		//score
-		ctx.fillStyle = "grey";
+		ctx.fillStyle = "black";
 		ctx.font = "30px Helvetica";
 		ctx.textAlign = "left";
 		ctx.fillText("Score: " + score, 10, 35);
