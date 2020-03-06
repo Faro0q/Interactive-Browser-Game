@@ -1,5 +1,6 @@
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("my-canvas");
 var ctx = canvas.getContext("2d");
+
 
 var lefty = false;
 var righty = false;
@@ -51,8 +52,8 @@ var player = {
 var goodArc = {
 	x:[],
 	y:[],
-	speed: 3,
-	color: ["red","blue","yellow"],
+	speed: 2,
+	color: ["white","white","white"],
 	state: []
 };
 var redNum = 0;
@@ -61,8 +62,8 @@ var redNum = 0;
 var badArc = {
 	x:[],
 	y:[],
-	speed: 3,
-	color: ["black", "purple", "#003300", "#663300", "white"]
+	speed: 2,
+	color: ["black", "purple", "#003300", "#663300", "red", "blue", "yellow"]
 
 };
 var blackNum = 0;
@@ -102,7 +103,7 @@ function drawNewBad() {
 	blackNum = badArc.x.length;
 }
 
-// draws red and blue balls
+
 function drawRedBall() {
 	for(var i = 0; i < redNum; i++){
 		if(goodArc.state[i] == true){
@@ -193,19 +194,24 @@ function playUpdate() {
 		}
 	}
 	switch(score){
-		case 20:
+		case 15:
 			badArc.speed = 3;
 			goodArc.speed = 3;
 			level = 2;
 			break;
 		case 30:
+            goodArc.speed = 4;
+            badArc.speed = 4;
 			level = 3;
 			break;
 		case 40: 
-			goodArc.speed = 4;
+			goodArc.speed = 5;
+            badArc.speed = 5;
 			level = 4;
 			break;
 		case 50:
+            goodArc.speed = 6;
+            badArc.speed = 6;
 			level = 5;
 			break;
 	}
@@ -240,16 +246,22 @@ function draw(){
 		playUpdate();
 		drawNewGood();
 		drawNewBad();
+        
+       // var img2 = document.getElementById("image2");
+       // ctx.drawImage(img2, 10, 10);
+        ctx.fillStyle = "grey";
+        ctx.font = "bold 300px Arial";
+        ctx.fillText(level, (canvas.width / 2) + 650, (canvas.height / 2) - 90);
 			
 		//score
-		ctx.fillStyle = "red";
+		ctx.fillStyle = "grey";
 		ctx.font = "30px Helvetica";
 		ctx.textAlign = "left";
-		ctx.fillText("Score: " + score, 20, 35);
+		ctx.fillText("Score: " + score, 10, 35);
 	
 		//lives
 		ctx.textAlign = "left";
-		ctx.fillText("No. Lives: " + lives, 20, 100);
+		ctx.fillText("Lives: " + lives, 10, 100);
 	}
 	else{
 		ctx.fillStyle = "brown";
